@@ -1,0 +1,25 @@
+{
+  "name": "simplest-router",
+  "version": "0.0.0",
+  "description": "A very simple router",
+  "main": "router.js",
+  "scripts": {
+    "test": "node node_modules/nodeunit/bin/nodeunit tests/test-routes.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greggman/simplest-router"
+  },
+  "keywords": [
+    "router"
+  ],
+  "author": "Gregg Tavares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/greggman/simplest-router/issues"
+  },
+  "homepage": "https://github.com/greggman/simplest-router",
+  "devDependencies": {
+    "nodeunit": "^0.9.0"
+  }
+}
