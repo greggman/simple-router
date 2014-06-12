@@ -138,4 +138,17 @@ Examples:
 
         blarg not handled.
 
+Why?
+----
+
+I'm sure this exists but when I looked all the routers I found were specifically targeted at URLs.
+I needed something more generic. This router doesn't care what the route is. You could pass in a function
+as the `id` to `route` and have every route have a function that calls the id it's passed, gets the result
+and returns `true` if it's the right thing.
+
+Bascially this router routes anything, not just strings, not just URLs. Pass in objects, have each
+function check something about the object, whatever.
+
+
+
 
