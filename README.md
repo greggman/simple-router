@@ -15,11 +15,11 @@ In the simplest example you do this
 
 then later
 
-    if (!r.route(id, args)) {
-      console.error("route not handled: " + id);
-    }
+    r.route(id, arg);
 
-routes passed to Router.add can be strings,
+If id is `"foo"` then `handleFoo` will be called. Etc.
+
+Routes passed to Router.add can be strings,
 regular expressions, or functions.
 
 For regular expressions `exec` is called.
@@ -35,7 +35,8 @@ handlers are passed a `RouterResult` which has 2 properties,
 regular expression or whatever the function returned if
 the route used a function. `id` is the id that
 was passed in to `route`. After that the arguments
-that were passed to `route`.
+that were passed to `route`. Whatever the handler returns
+is returned from `route`.
 
 Examples:
 
