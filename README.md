@@ -139,6 +139,72 @@ Examples:
 
         blarg not handled.
 
+5.  Using for http routing
+
+        var routerRouter = new Router();
+        var getRouter = new Router();
+        var postRouter = new Router();
+
+        getRouter.add("/", function(r, res, req) {
+            res.send("hello world");
+            res.end();
+        });
+
+        routerRouter.add("GET", function(r, req, res) {
+          getRouter.route(req.url, req, res);
+        });
+
+        routerRouter.add("POST", function(r, req, res) {
+          postRouter.route(req.url, req, res);
+        });
+
+        var server = http.createServer(function(req, res) {
+          routerRouter(req.method, req, res);
+        };
+
+    If you wanted to turn that into a similar signature as express it might
+    be something along the lines of
+
+        var App = function() {
+            this.methodRouter = new Router();
+            this.methodRouters = { };
+        };
+
+        App.prototype.addRoute(method, route, handle) = function() {
+            var router = this.methodRouters[method];
+            if (!router) {
+                router = new Router();
+                this.methodRouters[method] = router;
+                this.methodRouter.add(method, function(r, req, res) {
+                    router.route(req.url, req, res);
+                });
+            }
+
+            router.add(route, function(r, req, res) {
+                req.params = r.result.slice(1);
+                handler(req, res);
+            });
+        };
+
+        App.prototype.get = function(route, handler) {
+            this.addRoute("GET", route, handler);
+        };
+
+        App.prototype.post = function(route, handler) {
+            this.addRoute("POST", route, handler);
+        };
+
+        App.prototype.route = function(req, res) {
+            this.methodRouter(req.method, req, res);
+        };
+
+        function createApplication() {
+            var app = new App();
+            return App.prototype.route.bind(app);
+        }
+
+        exports = module.exports = createApplication;
+
 Why?
 ----
 
