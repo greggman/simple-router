@@ -1,7 +1,9 @@
 simple-router
 =============
 
-A extremely simple router
+An extremely simple router
+
+[![Build Status](https://travis-ci.org/greggman/simple-router.svg?branch=master)](https://travis-ci.org/greggman/simple-router)
 
 Router is basically an array id to function.
 You add ids and functions and it calls the
